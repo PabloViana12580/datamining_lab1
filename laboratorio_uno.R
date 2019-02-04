@@ -48,10 +48,22 @@ qqnorm(peliculas$revenue_adj)
 qqline(peliculas$revenue_adj)
 
 #4 preguntas
+options(max.print = 50)
 
 #10 peliculas con mas presupuesto
-orderData<-peliculas[c("original_title","budget","revenue")]
+orderData<-peliculas[c("original_title","budget","revenue","vote_count")]
 orderData[order(-orderData[,2]),]
 
 #10 peliculas con mejor ingreso
 orderData[order(-orderData[,3]),]
+
+#Pelicula mas votada
+options(max.print = 5)
+orderData[order(-orderData[,4]),]
+
+#Pelicula con menos votos
+orderData[order(orderData[,4]),]
+
+#Cuantas peliculas se hacen por año 
+#pelixano = aggregate(peliculas[,16],list(peliculas$release_year), mean)
+#head(pelixano)
