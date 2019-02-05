@@ -74,6 +74,12 @@ options(max.print = 20)
 orden[order(-orden[,2]),3]
 
 #4.7 género que predomina en el dataset - grafico
+getmode <- function(d) {
+  uniqv <- unique(d)
+  uniqv[which.max(tabulate(match(d, uniqv)))]
+}
+options(max.print = 5)
+getmode(peliculas$genres)
 
 #4.8 genero que obtuvieron mayores ganancias
 orden<-peliculas[c("original_title","revenue","genres")]
