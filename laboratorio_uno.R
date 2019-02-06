@@ -4,7 +4,7 @@
 library(nortest)
 
 # Definimos el directorio de trabajo
-setwd("C:\\Users\\anali\\Desktop\\Pablito\\Septimo Semestre\\Mineria de datos\\datasets\\")
+setwd("~/Desktop/2019/MD/R/HT1/datamining_lab1")
 
 # cargamos la base de datos a una variable
 peliculas<-read.csv("tmdb-movies.csv")
@@ -64,16 +64,16 @@ orderData[order(-orderData[,4]),]
 #4.4 Pelicula con menos votos
 orderData[order(orderData[,4]),]
 
-#4.5 Cuantas peliculas se hacen por año 
+#4.5 Cuantas peliculas se hacen por aÃ±o 
 #pelixano = aggregate(peliculas[,16],list(peliculas$release_year), mean)
 #head(pelixano)
 
-#4.6 Género principal de las 20 películas más populares
+#4.6 GÃ©nero principal de las 20 pelÃ­culas mÃ¡s populares
 orden<-peliculas[c("original_title","vote_count","genres")]
 options(max.print = 20)
 orden[order(-orden[,2]),3]
 
-#4.7 género que predomina en el dataset - grafico
+#4.7 gÃ©nero que predomina en el dataset - grafico
 getmode <- function(d) {
   uniqv <- unique(d)
   uniqv[which.max(tabulate(match(d, uniqv)))]
@@ -86,13 +86,13 @@ orden<-peliculas[c("original_title","revenue","genres")]
 options(max.print = 5)
 orden[order(-orden[,2]),3]
 
-#4.9 qué genero necesito mayor presupuesto
+#4.9 quÃ© genero necesito mayor presupuesto
 View(orden)
 orden<-peliculas[c("original_title","budget","genres")]
 options(max.print = 5)
 orden[order(-orden[,2]),3]
 
-#4.10 20 mejores directores que hicieron películas altamente calificadas
+#4.10 20 mejores directores que hicieron pelÃ­culas altamente calificadas
 orden<-peliculas[c("original_title","vote_count","director")]
 options(max.print = 30)
 orden[order(-orden[,2]),3]
@@ -112,4 +112,25 @@ View(meses_ingreso)
 #4.14 Calificaciones con exito comercial
 qqplot(peliculas$vote_count, peliculas$revenue)
 cor(peliculas$vote_count, peliculas$revenue)
-#4.15 A qu� g�nero peliculas mas largas
+
+#4.15 A qué género peliculas mas largas
+orden<-peliculas[c("original_title","genres","runtime")]
+options(max.print = 3)
+orden[order(-orden[,3]),2]
+
+#EXTRAS
+#5 ACTORES CON MAS GANANCIAS
+orden<-peliculas[c("original_title","cast","revenue_adj")]
+options(max.print = 5)
+orden[order(-orden[,3]),2]
+
+#DIRECTOR CON MAS PELICULAS
+ac<-getmode(peliculas$director)
+options(max.print = 5)
+ac
+
+#ESTUDIO CON PELICULA MAS LARGA
+orden<-peliculas[c("original_title","production_companies","runtime")]
+options(max.print = 2)
+orden[order(-orden[,3]),2]
+
