@@ -4,7 +4,7 @@
 library(nortest)
 
 # Definimos el directorio de trabajo
-setwd("~/Desktop/2019/MD/R/HT1/datamining_lab1")
+setwd("C:\\Users\\anali\\Desktop\\Pablito\\Septimo Semestre\\Mineria de datos\\datasets\\")
 
 # cargamos la base de datos a una variable
 peliculas<-read.csv("tmdb-movies.csv")
@@ -94,12 +94,22 @@ orden[order(-orden[,2]),3]
 
 #4.10 20 mejores directores que hicieron pelÃ­culas altamente calificadas
 orden<-peliculas[c("original_title","vote_count","director")]
-options(max.print = 20)
+options(max.print = 30)
 orden[order(-orden[,2]),3]
 
 #4.11 correlacion presupuestos - ingresos
-?cor
 hist(peliculas$budget)
 hist(peliculas$revenue)
 qqplot(peliculas$budget,peliculas$revenue)
 cor(peliculas$budget,peliculas$revenue)
+
+#4.12 asociacion meses - ingreso
+meses_ingreso<-aggregate(peliculas$revenue,by=list((substr(peliculas$release_date,2,3))),sum)
+View(meses_ingreso)
+
+#4.13 meses lanzamientos maximos
+
+#4.14 Calificaciones con exito comercial
+qqplot(peliculas$vote_count, peliculas$revenue)
+cor(peliculas$vote_count, peliculas$revenue)
+#4.15 A qué género peliculas mas largas
